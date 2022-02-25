@@ -1,21 +1,40 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div :class="$style.index">
+    <!-- <span>here is the entry of project</span>
+    <div :class="$style.children">
+      <router-view></router-view>
+    </div> -->
+    <BasicLayout :type="GlobalConfig.layoutType">
+      <template v-slot:children>
+        <router-view></router-view>
+      </template>
+    </BasicLayout>
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<script>
+import BasicLayout from '@/layout/BasicLayout.vue';
+import GlobalConfig from '@/config/index.js';
+
+export default {
+  name: 'app',
+  components: {
+    BasicLayout,
+  },
+  data() {
+    return {
+      GlobalConfig,
+    };
+  }
+};
+</script>
+
+<style src="@style/global.less"></style>
+
+<style lang="less" module>
+.index {
+  > span {
+    font-size: 2.4rem;
+  }
 }
 </style>
